@@ -2,18 +2,13 @@ require 'spec_helper'
 require_relative '../ports/dsl/ollama-ai'
 
 RSpec.describe Ollama do
-  let(:messages) {
-    [
-      { role: "user", content: "What is the meaning of life?"},
-    ]
-  }
+  let(:messages) { [{ role: "user", content: "What is the meaning of life?"}] }
 
   let(:request_body) {
     {
       model: "phi",
       system: "You are a helpful assistant.",
-      messages: messages,
-      stream: false 
+      messages: messages
     }  
   }
 
@@ -23,19 +18,7 @@ RSpec.describe Ollama do
       [
         200,
         { "Content-Type" => "application/json; charset=utf-8" },
-        {
-          created_at:  Time.now,
-          done: true,
-          done_reason: "stop",
-          eval_count: 2,
-          eval_duration: 129138000,
-          load_duration: 8373333,
-          message: { content: "Forty two", role: "assistant" },
-          model: "phi",
-          prompt_eval_count: 39,
-          prompt_eval_duration: 648149000,
-          total_duration: 913132084
-        }.to_json
+        { message: { content: "Forty two", role: "assistant" } }.to_json
       ]
     end
     stubs

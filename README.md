@@ -899,8 +899,12 @@ RequestError
 bundle
 rubocop -A
 
-bundle exec ruby spec/tasks/run-client.rb
-bundle exec ruby spec/tasks/test-encoding.rb
+# one time
+ollama pull phi
+ollama pull yi:latest
+
+ollama serve
+bundle exec rspec
 ```
 
 ### Purpose
